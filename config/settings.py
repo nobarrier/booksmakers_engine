@@ -29,6 +29,8 @@ if not SECRET_KEY:
 ALLOWED_HOSTS = [
     "makersworks.kr",
     "www.makersworks.kr",
+    "jparts.kr",  # 🔥 추가
+    "www.jparts.kr",  # 🔥 추가
     "54.116.91.126",
     "43.201.76.182",
     "127.0.0.1",
