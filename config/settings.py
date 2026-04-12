@@ -44,7 +44,7 @@ if DEBUG:
 # HTTPS (Nginx Reverse Proxy)
 # ========================
 
-USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_HOST = False
 SECURE_PROXY_SSL_HEADER = None
 
 SECURE_BROWSER_XSS_FILTER = True
