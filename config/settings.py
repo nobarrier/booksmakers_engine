@@ -45,23 +45,25 @@ if DEBUG:
 # ========================
 
 USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_PROXY_SSL_HEADER = None
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
 
-SECURE_SSL_REDIRECT = not DEBUG
+SECURE_SSL_REDIRECT = False
 
 CSRF_TRUSTED_ORIGINS = [
     "http://makersworks.kr",
     "http://www.makersworks.kr",
     "https://makersworks.kr",
     "https://www.makersworks.kr",
+    "http://jparts.kr",
+    "https://www.jparts.kr",
 ]
 
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 # ========================
 # APPLICATIONS
