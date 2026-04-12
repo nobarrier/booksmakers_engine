@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        Products
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    {% if category %}
+
+        <!-- 🔹 Breadcrumb + Depth Select -->
+        <div class="breadcrumb-bar">
+            <a href="{% url 'catalog:home' %}">HOME</a>
+
+            {% for node in ancestors %}
+                <span>›</span>
+                <select onchange="location = this.value;">
+                    {% for sibling in node.parent.children.all %}
+                        <option value="{% url 'catalog:category' sibling.slug %}"
+                                {% if sibling == node %}selected{% endif %}>
+                            {{ sibling.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            {% endfor %}
+
+            <span>›</span>
+            <strong>{{ category.name }}</strong>
+        </div>
+
+    {% endif %}
+
+    <!-- 🔹 Hero -->
+    <section class="mall-hero">
+        <h1>
+            {% if category %}
+                {{ category.name }}
+            {% else %}
+                Electronics Store
+            {% endif %}
+        </h1>
+        <p>Browse active products with fast category navigation.</p>
+    </section>
+
+    <!-- 🔹 상품 영역 -->
+    <div class="mall-grid">
+
+        {% for product in products %}
+            <article class="mall-card">
+
+                <a href="{% url 'catalog:detail' product.pk %}" class="mall-card__image-link">
+
+                    <div class="mall-card__thumb">
+
+                        {% if product.image_url|length > 5 %}
+                            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+
+                        {% elif product.images.first %}
+                            <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}">
+
+                        {% else %}
+                            <div class="mall-card__placeholder">NO IMAGE</div>
+
+                        {% endif %}
+
+                    </div>
+
+                </a>
+
+                <div class="mall-card__body">
+                    <p class="mall-card__category">{{ product.category.name }}</p>
+
+                    <h3 class="mall-card__title">
+                        <a href="{% url 'catalog:detail' product.pk %}">
+                            {{ product.name }}
+                        </a>
+                    </h3>
+
+                    <p class="mall-card__price">
+                        {{ product.price }} KRW
+                    </p>
+                </div>
+
+            </article>
+
+        {% empty %}
+            <p>No active products found in this category.</p>
+        {% endfor %}
+
+    </div>
+
+    <!-- 🔹 Pagination -->
+    {% if products.has_other_pages %}
+
+        <div class="pagination">
+
+            {% if products.has_previous %}
+                <a href="?page={{ products.previous_page_number }}">«</a>
+            {% endif %}
+
+            {% for num in products.paginator.page_range %}
+
+                {% if num == products.number %}
+                    <span class="current">{{ num }}</span>
+
+                {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+
+                {% endif %}
+
+            {% endfor %}
+
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">»</a>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

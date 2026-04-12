@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+
+    <div class="product-list">
+
+        {% for product in products %}
+
+            <div class="product-card">
+
+                <h3>{{ product.name }}</h3>
+
+                {% if product.lowest_price %}
+                    <p class="product-price">
+                        최저가 {{ product.lowest_price }}원
+                    </p>
+                {% else %}
+                    <p class="product-price">
+                        가격 정보 없음
+                    </p>
+                {% endif %}
+
+            </div>
+
+        {% empty %}
+
+            <p>상품이 없습니다.</p>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

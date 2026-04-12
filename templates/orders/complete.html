@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>주문 완료</h2>
+
+    <p>주문이 성공적으로 완료되었습니다.</p>
+
+    <a href="{% url 'catalog:home' %}">상품 보러가기</a>
+
+{% endblock %}

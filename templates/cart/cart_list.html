@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>장바구니</h2>
+
+    {% if products %}
+        <table class="cart-table">
+            <tr>
+                <th>상품명</th>
+                <th>수량</th>
+                <th>가격</th>
+                <th>삭제</th>
+            </tr>
+
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>
+                        <a class="cart-btn" href="{% url 'cart:cart_decrease' product.id %}">-</a>
+                        {{ product.total_quantity }}
+                        <a class="cart-btn" href="{% url 'cart:cart_increase' product.id %}">+</a>
+                    </td>
+                    <td>{{ product.total_price }} 원</td>
+                    <td>
+                        <a class="cart-btn" href="{% url 'cart:cart_remove' product.id %}">삭제</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3>총 금액: {{ total_price }} 원</h3>
+
+        <a href="{% url 'orders:checkout' %}" class="cart-btn">
+            주문하기
+        </a>
+
+        
+    {% else %}
+        <p>장바구니가 비어 있습니다.</p>
+    {% endif %}
+
+{% endblock %}

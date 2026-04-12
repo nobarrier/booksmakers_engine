@@ -1,0 +1,112 @@
+{% load static %}
+
+<header class="header">
+
+    <!-- 1. 상단바 -->
+    <div class="topbar">
+        <div class="container">
+
+            <div class="left">
+                <a href="{% url 'catalog:home' %}">홈</a>
+            </div>
+
+            <div class="right">
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'users:mypage' %}">마이페이지</a>
+                    <a href="{% url 'logout' %}">로그아웃</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}">로그인</a>
+                    <a href="{% url 'users:signup' %}">회원가입</a>
+                {% endif %}
+
+                <a href="{% url 'accounts:order_history' %}">주문조회</a>
+                <a href="{% url 'accounts:support' %}">고객센터</a>
+                <a href="{% url 'cart:cart_view' %}">장바구니</a>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 2. 로고 + 검색 + 장바구니 -->
+    <div class="header-main">
+        <div class="container">
+
+            <div class="logo">
+                <a href="{% url 'catalog:home' %}">
+                    <img src="{% static 'img/logo/makersworks_logo.png' %}" alt="logo">
+                </a>
+            </div>
+
+            <div class="search">
+                <form method="get">
+                    <input type="text"
+                           name="q"
+                           placeholder="부품 · 키트 · 교육 검색"
+                           value="{{ q|default:'' }}">
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+
+            <div class="cart">
+                <a href="{% url 'cart:cart_view' %}">
+                    장바구니 (
+                    {% if request.session.cart %}
+                        {{ request.session.cart|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                    )
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 3. 카테고리 바 -->
+    <div class="category-bar">
+        <div class="container">
+
+            <ul class="main-menu">
+                {% for category in categories %}
+                    <li class="menu-item">
+                        <a href="{% url 'catalog:category' category.slug %}">{{ category.name }}</a>
+
+                        {% if category.children.all %}
+                            <div class="top-dropdown">
+                                {% for child in category.children.all %}
+                                    <div class="mega-column">
+
+                                        <!-- 2차 -->
+                                        <a class="level2"
+                                           href="{% url 'catalog:category' child.slug %}">
+                                            {{ child.name }}
+                                        </a>
+
+                                        <!-- 3차: 기본 숨김, 2차 hover 시만 표시 -->
+                                        {% if child.children.all %}
+                                            <div class="level3-group">
+                                                {% for sub in child.children.all %}
+                                                    <a href="{% url 'catalog:category' sub.slug %}">
+                                                        {{ sub.name }}
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+</header>

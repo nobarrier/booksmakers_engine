@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}BOOKSMAKERS{% endblock %}</title>
+
+    <!-- 전역 -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+
+    <!-- 공통 -->
+    <link rel="stylesheet" href="{% static 'css/partials/header.css' %}">
+
+    <!-- 컴포넌트 -->
+    <link rel="stylesheet" href="{% static 'css/components/card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/search.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+{% include "partials/header.html" %}
+
+<div class="layout-wrapper">
+    <div class="layout">
+
+        <!-- 🔥 사이드바는 여기 한 번만 -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'catalog:category' category.slug %}">
+                            {{ category.name }}
+                        </a>
+
+                        {% if category.children.all %}
+                            <ul>
+                                {% include "partials/nav_recursive.html" with children=category.children.all %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <!-- 🔥 콘텐츠는 여기 한 번만 -->
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+</div>
+
+{% include "partials/footer.html" %}
+
+<script src="{% static 'js/menu.js' %}"></script>
+
+</body>
+</html>

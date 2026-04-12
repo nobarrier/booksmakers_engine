@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase Orders</title>
+</head>
+<body>
+
+<h1>Purchase Orders</h1>
+
+<a href="/create-po/">
+    <button>발주 생성</button>
+</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Company</th>
+        <th>Partner</th>
+        <th>Download</th>
+    </tr>
+
+    {% for doc in documents %}
+        <tr>
+            <td>{{ doc.id }}</td>
+            <td>{{ doc.company.name }}</td>
+            <td>{{ doc.partner.name }}</td>
+            <td>
+                <a href="/export-po/{{ doc.id }}/">
+                    다운로드
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

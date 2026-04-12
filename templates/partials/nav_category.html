@@ -1,0 +1,30 @@
+{% for category in categories %}
+    <li class="menu-item">
+        <a href="{% url 'catalog:category' category.slug %}">
+            {{ category.name }}
+        </a>
+
+        {% if category.children.exists %}
+            <div class="top-dropdown">
+                {% for child in category.children.all %}
+                    <div class="mega-column">
+                        <a class="level2"
+                           href="{% url 'catalog:category' child.slug %}">
+                            {{ child.name }}
+                        </a>
+
+                        {% if child.children.exists %}
+                            <div class="level3-group">
+                                {% for sub in child.children.all %}
+                                    <a href="{% url 'catalog:category' sub.slug %}">
+                                        {{ sub.name }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </li>
+{% endfor %}

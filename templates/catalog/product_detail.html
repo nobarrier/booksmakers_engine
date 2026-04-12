@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <article class="product-detail">
+
+        <div class="product-detail__media">
+            {% if product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            {% elif product.images.all %}
+                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <div class="product-detail__placeholder">NO IMAGE</div>
+            {% endif %}
+        </div>
+
+        <div class="product-detail__info">
+
+            <p class="product-detail__category">{{ product.category.name }}</p>
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="product-detail__price">{{ product.price }} KRW</p>
+
+            <p class="product-detail__desc">
+                {{ product.description|default:"No description available." }}
+            </p>
+
+
+            <a class="product-detail__back" href="{% url 'catalog:home' %}">
+                Back to products
+            </a>
+
+            <a href="{% url 'cart:cart_add' product.id %}">
+                <button>장바구니 담기</button>
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <!-- ===================== -->
+    <!-- 가격 비교 테이블 -->
+    <!-- ===================== -->
+
+    <section class="price-compare">
+
+        <h2>가격 비교</h2>
+
+        <table class="price-table">
+
+            <thead>
+            <tr>
+                <th>판매처</th>
+                <th>가격</th>
+                <th>재고</th>
+                <th>구매</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for sp in prices %}
+
+                <tr>
+
+                    <td>
+                        {{ sp.supplier.name }}
+                    </td>
+
+                    <td>
+
+                        {% if forloop.first %}
+                            <span class="best-price">🔥 {{ sp.price }} KRW</span>
+                        {% else %}
+                            {{ sp.price }} KRW
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if sp.stock > 0 %}
+                            {{ sp.stock }}
+                        {% else %}
+                            품절
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if sp.stock > 0 %}
+                            <a href="{{ sp.url }}" target="_blank" class="buy-btn">
+                                구매하기
+                            </a>
+                        {% else %}
+                            <span class="soldout-btn">품절</span>
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+                    <td colspan="4">
+                        가격 정보 없음
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+{% endblock %}

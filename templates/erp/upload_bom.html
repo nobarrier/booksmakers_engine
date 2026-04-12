@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BOM 업로드</title>
+</head>
+<body>
+
+<h1>BOM 엑셀 업로드</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="file" name="file" required>
+
+    <br><br>
+
+    <button type="submit">업로드</button>
+</form>
+
+</body>
+</html>

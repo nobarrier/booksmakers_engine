@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BOM 입력</title>
+</head>
+<body>
+
+<h1>BOM 입력</h1>
+
+<table border="1" id="bomTable">
+    <tr>
+        <th>품명</th>
+        <th>수량</th>
+        <th>단가</th>
+        <th>금액</th>
+    </tr>
+
+    <tr>
+        <td><input type="text" class="name"></td>
+        <td><input type="number" class="qty" oninput="calculate(this)"></td>
+        <td><input type="number" class="price" oninput="calculate(this)"></td>
+        <td><input type="number" class="amount" readonly></td>
+    </tr>
+</table>
+
+<br>
+<button onclick="addRow()">행 추가</button>
+
+<h3>총합: <span id="total">0</span></h3>
+
+<script>
+    function calculate(el) {
+        let row = el.parentElement.parentElement;
+
+        let qty = row.querySelector('.qty').value || 0;
+        let price = row.querySelector('.price').value || 0;
+
+        let amount = qty * price;
+
+        row.querySelector('.amount').value = amount;
+
+        updateTotal();
+    }
+
+    function updateTotal() {
+        let total = 0;
+        document.querySelectorAll('.amount').forEach(el => {
+            total += parseFloat(el.value) || 0;
+        });
+        document.getElementById('total').innerText = total;
+    }
+
+    function addRow() {
+        let table = document.getElementById('bomTable');
+        let newRow = table.rows[1].cloneNode(true);
+
+        newRow.querySelectorAll('input').forEach(input => input.value = '');
+
+        table.appendChild(newRow);
+    }
+</script>
+
+</body>
+</html>

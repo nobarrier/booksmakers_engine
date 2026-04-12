@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>주문서 작성</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>이름: <input type="text" name="name" required></p>
+        <p>전화번호: <input type="text" name="phone" required></p>
+        <p>주소: <textarea name="address" required></textarea></p>
+
+        <button type="submit">주문 완료</button>
+    </form>
+
+{% endblock %}
+F

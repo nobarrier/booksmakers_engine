@@ -1,0 +1,13 @@
+{% for child in children %}
+    <li>
+        <a href="{% url 'catalog:category' child.slug %}">
+            {{ child.name }}
+        </a>
+
+        {% if category.children.all %}
+            <ul>
+                {% include "partials/nav_recursive.html" with children=child.children.all %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

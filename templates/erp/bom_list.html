@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BOM 리스트</title>
+</head>
+<body>
+
+<div style="margin-bottom:20px;">
+    <a href="/erp/create-pr/{{ group.id }}/">
+        <button>품의서</button>
+    </a>
+
+    <a href="/erp/create-rfq/{{ group.id }}/">
+        <button>견적요청</button>
+    </a>
+
+    <a href="/erp/create-po/{{ group.id }}/">
+        <button>발주서</button>
+    </a>
+</div>
+
+<h1>BOM 비교 화면</h1>
+
+<p><strong>BOM_ID:</strong> {{ bom_id }}</p>
+<p><strong>DB 저장 건수:</strong> {{ created_count }}</p>
+
+<h2>1. 업로드한 엑셀 원본</h2>
+
+<div>
+    {{ excel_html|safe }}
+</div>
+<br><br>
+
+
+<h2>2. DB에 저장된 내용</h2>
+<table border="1">
+    <tr>
+        <th>BOM_ID</th>
+        <th>번호</th>
+        <th>MPN</th>
+        <th>구분</th>
+        <th>메이커</th>
+        <th>품명</th>
+        <th>규격</th>
+        <th>단위</th>
+        <th>수량</th>
+        <th>단가</th>
+        <th>금액</th>
+        <th>공급가액</th>
+        <th>구매처</th>
+        <th>DRAFT</th>
+        <th>RFQ</th>
+        <th>QUOTED</th>
+        <th>CONFIRMED</th>
+        <th>ORDERED</th>
+        <th>DELIVERED</th>
+        <th>REMARK</th>
+    </tr>
+
+    {% for line in lines %}
+        <tr>
+            <td>{{ line.group.name|cut:" ("|cut:")" }}</td>
+            <td>{{ line.row_no }}</td>
+            <td>{{ line.mpn|default:"" }}</td>
+            <td>{{ line.category|default:"" }}</td>
+            <td>{{ line.maker|default:"" }}</td>
+            <td>{{ line.item_name|default:"" }}</td>
+            <td>{{ line.spec|default:"" }}</td>
+            <td>{{ line.unit|default:"" }}</td>
+            <td>{{ line.qty|default:"" }}</td>
+            <td>{{ line.unit_price|default:"" }}</td>
+            <td>{{ line.amount|default:"" }}</td>
+            <td>{{ line.supply_amount|default:"" }}</td>
+            <td>{{ line.supplier|default:"" }}</td>
+            <td>{% if line.draft %}✔{% endif %}</td>
+            <td>{{ line.rfq }}</td>
+            <td>{{ line.quoted }}</td>
+            <td>{{ line.confirmed }}</td>
+            <td>{{ line.ordered }}</td>
+            <td>{{ line.delivered }}</td>
+            <td>{{ line.remark }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
