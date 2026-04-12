@@ -1,0 +1,41 @@
+/* ===== 전체 레이아웃 ===== */
+
+.layout-wrapper {
+    width: 100%;
+    background: #f6f8fb;
+    padding: 50px 0 80px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    width: 1200px;
+    margin: 40px auto;
+}
+
+/* ===== 메인 ===== */
+
+.content {
+    min-height: 700px;
+}
+
+
+.breadcrumb {
+    letter-spacing: 0.3px;
+}
+
+
+.breadcrumb-bar {
+    font-size: 16px; /* 기존 13~14px에서 키움 */
+    font-weight: 500;
+}
+
+.breadcrumb a {
+    font-size: 16px;
+}
+
+.breadcrumb strong {
+    font-size: 17px;
+    font-weight: 700;
+}

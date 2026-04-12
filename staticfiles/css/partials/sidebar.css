@@ -1,0 +1,93 @@
+/* =========================================
+   SIDEBAR - MATCHED WITH TOPBAR
+========================================= */
+
+/* 1st level */
+.sidebar {
+    width: 250px;
+    background: #2e627a; /* Same as topbar */
+    padding: 20px;
+    border-radius: 12px;
+    position: relative;
+}
+
+/* Base lists */
+.sidebar-menu,
+.sidebar-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    position: relative;
+    margin-bottom: 6px;
+}
+
+/* 1st level link */
+.sidebar-menu > li > a {
+    display: block;
+    color: #ffffff;
+    padding: 12px 12px; /* Match topbar vertical rhythm */
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.sidebar-menu > li > a:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================
+   2nd level (Topbar 2nd tone)
+========================================= */
+
+.sidebar-menu ul {
+    display: none;
+    position: absolute;
+
+    top: 0;
+    left: 100%;
+
+    margin: 0;
+    padding: 12px 0;
+
+    min-width: 220px;
+    background: rgba(46, 96, 120, 0.98);
+
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================
+   3rd level (slightly darker tone)
+========================================= */
+
+.sidebar-menu ul ul {
+    background: rgb(46, 97, 121);
+}
+
+/* Links */
+.sidebar-menu ul a {
+    display: block;
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.sidebar-menu ul a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* JS open based display */
+.sidebar-menu li.open > ul {
+    display: block;
+}
+
+/* Active */
+.sidebar-menu a.active {
+    background: rgba(255, 255, 255, 0.20);
+}

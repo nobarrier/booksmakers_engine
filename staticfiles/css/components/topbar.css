@@ -1,0 +1,94 @@
+/* =========================================
+   TOPBAR FLYOUT VERSION (FINAL STABLE)
+========================================= */
+
+.category-bar {
+    background: #2e627a;
+    position: relative;
+}
+
+.category-bar .main-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.category-bar .menu-item {
+    position: relative;
+}
+
+.category-bar .menu-item > a {
+    color: #ffffff;
+    padding: 12px 0;
+    display: block;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.category-bar .menu-item > a:hover {
+    color: #ffd54f;
+}
+
+/* =========================
+   2차 (Flyout)
+========================= */
+
+.category-bar .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    min-width: 220px;
+    background: #225a75;
+    padding: 10px 0;
+    border-radius: 8px;
+}
+
+/* =========================
+   3차 (Flyout)
+========================= */
+
+.category-bar .sub-dropdown {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+
+    min-width: 220px;
+    background: #27647e;
+    padding: 10px 0;
+    border-radius: 8px;
+}
+
+/* JS가 붙이는 open 클래스 기반 */
+.category-bar li.open > .dropdown,
+.category-bar li.open > .sub-dropdown {
+    display: block;
+}
+
+/* 항목 */
+.category-bar .dropdown li,
+.category-bar .sub-dropdown li {
+    padding: 6px 16px;
+}
+
+.category-bar .dropdown a,
+.category-bar .sub-dropdown a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.category-bar .dropdown a:hover,
+.category-bar .sub-dropdown a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Active */
+.category-bar .menu-item > a.active {
+    color: #ffd54f;
+    font-weight: 700;
+}

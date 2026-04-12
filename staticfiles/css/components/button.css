@@ -1,0 +1,44 @@
+/* ===== 기본 버튼 ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all .2s ease;
+    text-decoration: none;
+}
+
+/* Primary */
+.btn-primary {
+    background: #1f4f63;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #163b49;
+}
+
+/* Secondary */
+.btn-outline {
+    background: transparent;
+    border: 1px solid #1f4f63;
+    color: #1f4f63;
+}
+
+.btn-outline:hover {
+    background: #1f4f63;
+    color: white;
+}
+
+/* Danger */
+.btn-danger {
+    background: #e53935;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c62828;
+}

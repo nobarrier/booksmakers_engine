@@ -59,6 +59,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://makersworks.kr",
     "https://www.makersworks.kr",
     "http://jparts.kr",
+    "http://www.jparts.kr",
+    "https://jparts.kr",
     "https://www.jparts.kr",
 ]
 
