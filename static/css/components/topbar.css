@@ -92,3 +92,33 @@
     color: #ffd54f;
     font-weight: 700;
 }
+
+/* =========================================
+   HEADER MAIN (로고 + 검색 + 장바구니)
+========================================= */
+
+.header-main {
+    padding: 16px 0;
+}
+
+.header-main .container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.search {
+    flex: 1;
+    max-width: 600px;
+    margin: 0 20px;
+}
