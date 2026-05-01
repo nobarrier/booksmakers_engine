@@ -9,8 +9,27 @@
         <p>전화번호: <input type="text" name="phone" required></p>
         <p>주소: <textarea name="address" required></textarea></p>
 
-        <button type="submit">주문 완료</button>
+        <button type="button" onclick="requestPay()">결제하기</button>
     </form>
 
+    <script src="https://js.tosspayments.com/v1/payment"></script>
+
+    <script>
+        function requestPay() {
+            var clientKey = "test_ck_여기에_키";  // 토스 테스트 키
+
+            var tossPayments = TossPayments(clientKey);
+
+            tossPayments.requestPayment("카드", {
+                amount: 1000,
+                orderId: "ORDER_" + new Date().getTime(),
+                orderName: "테스트 상품",
+                customerName: document.querySelector('input[name="name"]').value,
+
+                successUrl: "https://jparts.kr/pay/success/",
+                failUrl: "https://jparts.kr/pay/fail/"
+            });
+        }
+    </script>
 {% endblock %}
 F

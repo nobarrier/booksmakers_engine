@@ -10,6 +10,16 @@ from erp.views import bom_input_view
 from erp.views import upload_bom_view
 from erp.views import bom_list_view
 from django.views.generic import TemplateView
+from django.shortcuts import render
+
+
+def pay_success(request):
+    return render(request, "orders/pay_success.html")
+
+
+def pay_fail(request):
+    return render(request, "orders/pay_fail.html")
+
 
 urlpatterns = [
     path("", RedirectView.as_view(url="/catalog/", permanent=False)),
@@ -32,6 +42,8 @@ urlpatterns = [
         TemplateView.as_view(template_name="policy/company.html"),
         name="company",
     ),
+    path("pay/success/", pay_success, name="pay_success"),
+    path("pay/fail/", pay_fail, name="pay_fail"),
 ]
 
 if settings.DEBUG:
