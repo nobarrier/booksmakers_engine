@@ -9,6 +9,7 @@ from erp.views import export_po_view, po_list_view, create_po_view
 from erp.views import bom_input_view
 from erp.views import upload_bom_view
 from erp.views import bom_list_view
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", RedirectView.as_view(url="/catalog/", permanent=False)),
@@ -26,6 +27,11 @@ urlpatterns = [
     path("upload-bom/", upload_bom_view),
     path("bom-list/<int:group_id>/", bom_list_view),
     path("erp/", include("erp.urls")),
+    path(
+        "company/",
+        TemplateView.as_view(template_name="policy/company.html"),
+        name="company",
+    ),
 ]
 
 if settings.DEBUG:
