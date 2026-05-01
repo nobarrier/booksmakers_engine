@@ -27,13 +27,16 @@
                 {{ product.description|default:"No description available." }}
             </p>
 
-
             <a class="product-detail__back" href="{% url 'catalog:home' %}">
                 Back to products
             </a>
 
             <a href="{% url 'cart:cart_add' product.id %}">
-                <button>장바구니 담기</button>
+                <button type="button">장바구니 담기</button>
+            </a>
+
+            <a href="{% url 'cart:cart_add' product.id %}">
+                <button type="button">바로구매</button>
             </a>
 
         </div>
@@ -42,19 +45,19 @@
 
 
     <!-- ===================== -->
-    <!-- 가격 비교 테이블 -->
+    <!-- JPARTS 공급 정보 -->
     <!-- ===================== -->
 
     <section class="price-compare">
 
-        <h2>가격 비교</h2>
+        <h2>공급 정보</h2>
 
         <table class="price-table">
 
             <thead>
             <tr>
-                <th>판매처</th>
-                <th>가격</th>
+                <th>공급처</th>
+                <th>참고가</th>
                 <th>재고</th>
                 <th>구매</th>
             </tr>
@@ -71,35 +74,29 @@
                     </td>
 
                     <td>
-
                         {% if forloop.first %}
                             <span class="best-price">🔥 {{ sp.price }} KRW</span>
                         {% else %}
                             {{ sp.price }} KRW
                         {% endif %}
-
                     </td>
 
                     <td>
-
                         {% if sp.stock > 0 %}
                             {{ sp.stock }}
                         {% else %}
                             품절
                         {% endif %}
-
                     </td>
 
                     <td>
-
                         {% if sp.stock > 0 %}
-                            <a href="{{ sp.url }}" target="_blank" class="buy-btn">
-                                구매하기
+                            <a href="{% url 'cart:cart_add' product.id %}" class="buy-btn">
+                                JPARTS 구매
                             </a>
                         {% else %}
                             <span class="soldout-btn">품절</span>
                         {% endif %}
-
                     </td>
 
                 </tr>
@@ -108,7 +105,7 @@
 
                 <tr>
                     <td colspan="4">
-                        가격 정보 없음
+                        공급 정보 없음
                     </td>
                 </tr>
 
@@ -117,6 +114,10 @@
             </tbody>
 
         </table>
+
+        <p style="margin-top:12px; font-size:13px; color:#666;">
+            ※ 표시된 가격과 재고는 참고용이며, 실제 주문 가능 여부는 JPARTS 주문 확인 후 확정됩니다.
+        </p>
 
     </section>
 
