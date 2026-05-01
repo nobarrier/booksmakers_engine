@@ -44,6 +44,14 @@ urlpatterns = [
     ),
     path("pay/success/", pay_success, name="pay_success"),
     path("pay/fail/", pay_fail, name="pay_fail"),
+    path(
+        "terms/", TemplateView.as_view(template_name="policy/terms.html"), name="terms"
+    ),
+    path(
+        "privacy/",
+        TemplateView.as_view(template_name="policy/privacy.html"),
+        name="privacy",
+    ),
 ]
 
 if settings.DEBUG:
