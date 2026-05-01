@@ -12,7 +12,7 @@ def add_to_cart(request, product_id):
 
     request.session["cart"] = cart
 
-    return redirect("catalog:home")
+    return redirect("/order/checkout/")
 
 
 def cart_view(request):
