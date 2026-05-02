@@ -14,14 +14,12 @@ def add_to_cart(request, product_id):
 
     request.session["cart"] = cart
 
-    # 🔥 바로구매 분기
     next_page = request.GET.get("next")
 
     if next_page == "checkout":
         return redirect("/order/checkout/")
 
-    # 기본 → 장바구니 페이지
-    return redirect("cart:cart_list")
+    return redirect("/cart/")
 
 
 def cart_view(request):
