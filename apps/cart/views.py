@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from apps.catalog.models import Product
 
+from django.shortcuts import redirect
+
 
 def add_to_cart(request, product_id):
     cart = request.session.get("cart", {})
@@ -12,7 +14,14 @@ def add_to_cart(request, product_id):
 
     request.session["cart"] = cart
 
-    return redirect("/order/checkout/")
+    # 🔥 바로구매 분기
+    next_page = request.GET.get("next")
+
+    if next_page == "checkout":
+        return redirect("/order/checkout/")
+
+    # 기본 → 장바구니 페이지
+    return redirect("cart:cart_list")
 
 
 def cart_view(request):
