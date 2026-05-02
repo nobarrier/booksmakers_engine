@@ -1,42 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>장바구니</h2>
+    <div style="max-width:900px; margin:40px auto;">
 
-    {% if products %}
-        <table class="cart-table">
-            <tr>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>가격</th>
-                <th>삭제</th>
-            </tr>
+        <h2>장바구니</h2>
 
-            {% for product in products %}
+        {% if products %}
+            <table class="cart-table" style="width:100%; border-collapse:collapse;">
+                <thead>
                 <tr>
-                    <td>{{ product.name }}</td>
-                    <td>
-                        <a class="cart-btn" href="{% url 'cart:cart_decrease' product.id %}">-</a>
-                        {{ product.total_quantity }}
-                        <a class="cart-btn" href="{% url 'cart:cart_increase' product.id %}">+</a>
-                    </td>
-                    <td>{{ product.total_price }} 원</td>
-                    <td>
-                        <a class="cart-btn" href="{% url 'cart:cart_remove' product.id %}">삭제</a>
-                    </td>
+                    <th>상품명</th>
+                    <th>수량</th>
+                    <th>가격</th>
+                    <th>삭제</th>
                 </tr>
-            {% endfor %}
-        </table>
+                </thead>
 
-        <h3>총 금액: {{ total_price }} 원</h3>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
 
-        <a href="{% url 'orders:checkout' %}" class="cart-btn">
-            주문하기
-        </a>
+                        <td>
+                            <a class="cart-btn" href="{% url 'cart:cart_decrease' product.id %}">-</a>
+                            {{ product.total_quantity }}
+                            <a class="cart-btn" href="{% url 'cart:cart_increase' product.id %}">+</a>
+                        </td>
 
-        
-    {% else %}
-        <p>장바구니가 비어 있습니다.</p>
-    {% endif %}
+                        <td>{{ product.total_price }} 원</td>
 
+                        <td>
+                            <a class="cart-btn" href="{% url 'cart:cart_remove' product.id %}">
+                                삭제
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div style="margin-top:20px;">
+                <h3>총 금액: {{ total_price }} 원</h3>
+            </div>
+
+            <div style="margin-top:20px;">
+                <a href="{% url 'orders:checkout' %}">
+                    <button type="button" style="padding:10px 20px;">
+                        주문하기
+                    </button>
+                </a>
+            </div>
+
+        {% else %}
+            <p>장바구니가 비어 있습니다.</p>
+        {% endif %}
+
+    </div>
 {% endblock %}
