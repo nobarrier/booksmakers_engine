@@ -3,6 +3,7 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
+
     <article class="product-detail">
 
         <div class="product-detail__media">
@@ -24,7 +25,7 @@
             <p class="product-detail__price">{{ product.price }} KRW</p>
 
             <p class="product-detail__desc">
-                {{ product.description|default:"No description available." }}
+                {{ product.short_description|default:"No description available." }}
             </p>
 
             <a class="product-detail__back" href="{% url 'catalog:home' %}">
@@ -33,6 +34,10 @@
 
             <a href="{% url 'cart:cart_add' product.id %}">
                 <button type="button">장바구니 담기</button>
+            </a>
+
+            <a href="{% url 'cart:cart_list' %}">
+                <button type="button">장바구니 보기</button>
             </a>
 
             <a href="{% url 'cart:cart_add' product.id %}?next=checkout">
