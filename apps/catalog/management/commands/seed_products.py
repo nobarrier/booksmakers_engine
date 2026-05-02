@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from apps.catalog.models import Category, Product
+from django.utils.text import slugify
 import random
 
 
@@ -8,7 +9,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        # 🔥 children이 없는 카테고리만 가져오기
         leaf_categories = Category.objects.filter(children__isnull=True)
 
         if not leaf_categories.exists():
@@ -17,7 +17,11 @@ class Command(BaseCommand):
 
         for category in leaf_categories:
             for i in range(1, 6):
+                serial = f"TEST-{category.id}-{i}"
+
                 Product.objects.create(
+                    serial_number=serial,  # 🔥 핵심 추가
+                    slug=slugify(serial),
                     category=category,
                     name=f"{category.name} 상품 {i}",
                     price=random.randint(10000, 150000),
