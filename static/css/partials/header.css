@@ -6,6 +6,7 @@
     position: relative;
     background: #2e627a;
     overflow: visible;
+    z-index: 1000;
 }
 
 .category-bar .main-menu {
@@ -13,14 +14,13 @@
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: 26px;
 
     margin: 0;
-    padding: 10px 0;
+    padding: 12px 0;
 
     white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow: visible;
 }
 
 .category-bar .menu-item {
@@ -33,8 +33,7 @@
     align-items: center;
     justify-content: center;
 
-    min-width: max-content;
-    padding: 10px 14px;
+    padding: 10px 4px;
 
     color: #ffffff;
     font-weight: 700;
@@ -42,14 +41,13 @@
     line-height: 1.2;
     text-decoration: none;
 
-    border-radius: 10px;
     white-space: nowrap;
 }
 
 .category-bar .menu-item > a:hover,
 .category-bar .menu-item > a.active {
-    background: rgba(255, 255, 255, 0.14);
     color: #ffffff;
+    background: transparent;
 }
 
 /* =========================================
@@ -64,16 +62,16 @@
 
     min-width: 900px;
     max-width: 1200px;
-    padding: 20px 30px;
+    padding: 24px 30px;
 
     background: rgba(46, 97, 121, 0.98);
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 14px 14px;
 
     flex-wrap: wrap;
     gap: 30px;
 
     z-index: 9999;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
 }
 
 .category-bar .menu-item:hover > .top-dropdown,
@@ -90,8 +88,8 @@
     flex-direction: column;
     min-width: 170px;
 
-    background: rgba(32, 72, 92, 0.75);
-    padding: 12px;
+    background: rgba(32, 72, 92, 0.9);
+    padding: 14px;
     border-radius: 10px;
 }
 
