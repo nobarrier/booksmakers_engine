@@ -21,7 +21,6 @@ class Command(BaseCommand):
                     category=category,
                     name=f"{category.name} 상품 {i}",
                     price=random.randint(10000, 150000),
-                    description=f"{category.name} 관련 데모 상품입니다.",
                     is_active=True,
                 )
 
