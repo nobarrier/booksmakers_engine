@@ -44,7 +44,6 @@ def search_products(keyword="Raspberry Pi"):
 def normalize_products(data):
     products = []
 
-    # Digikey 응답 구조 대응
     if "Products" in data:
         product_list = data.get("Products", [])
     elif "ProductSearchResults" in data:
@@ -53,62 +52,50 @@ def normalize_products(data):
         product_list = []
 
     for item in product_list:
+        primary_photo = item.get("PrimaryPhoto") or {}
+        description = item.get("Description") or {}
+        variations = item.get("ProductVariations") or []
 
-        # 이미지
         image_url = (
             item.get("ImageUrl")
             or item.get("PhotoUrl")
-            or item.get("PrimaryPhoto", {}).get("MediumPhotoUrl")
-            or item.get("PrimaryPhoto", {}).get("SmallPhotoUrl")
+            or primary_photo.get("MediumPhotoUrl")
+            or primary_photo.get("SmallPhotoUrl")
+            or primary_photo.get("LargePhotoUrl")
         )
 
-        # Variations
-        variations = item.get("ProductVariations", [])
-
-        # Digikey Part Number
         dk_part = (
             item.get("DigiKeyProductNumber")
             or item.get("DigiKeyPartNumber")
             or (variations[0].get("DigiKeyProductNumber") if variations else None)
         )
 
-        # 🔥 Manufacturer
         manufacturer = None
         if item.get("Manufacturer"):
             manufacturer = item.get("Manufacturer", {}).get("Name")
 
-        # 🔥 진짜 MPN
-        mpn = item.get("ManufacturerProductNumber")
+        mpn = item.get("ManufacturerProductNumber") or dk_part
 
-        # fallback
-        if not mpn:
-            mpn = dk_part
-
-        # Category Path
         category_path = []
+        category = item.get("Category")
 
-        if item.get("Category"):
-
-            category = item.get("Category")
-
-            while category:
-                category_path.insert(0, category.get("Name"))
-                category = category.get("Parent")
+        while category:
+            name = category.get("Name")
+            if name:
+                category_path.insert(0, name)
+            category = category.get("Parent")
 
         products.append(
             {
                 "manufacturer": manufacturer,
                 "mpn": mpn,
                 "dk_part": dk_part,
-                "description": (
-                    item.get("Description", {}).get("ProductDescription")
-                    if item.get("Description")
-                    else None
-                ),
-                "price": item.get("UnitPrice"),
-                "image": image_url,
-                "url": item.get("ProductUrl"),
-                "stock": item.get("QuantityAvailable"),
+                "description": description.get("ProductDescription")
+                or item.get("ProductDescription"),
+                "price": item.get("UnitPrice") or 0,
+                "image": image_url or "",
+                "url": item.get("ProductUrl") or "",
+                "stock": item.get("QuantityAvailable") or 0,
                 "category_path": category_path,
             }
         )
