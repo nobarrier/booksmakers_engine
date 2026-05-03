@@ -1,3 +1,4 @@
+import time
 import requests
 from django.conf import settings
 from .digikey_auth import get_access_token
@@ -11,12 +12,11 @@ else:
     BASE_URL = "https://api.digikey.com"
 
 
-def search_products(keyword="Raspberry Pi"):
+def search_products(keyword="Raspberry Pi", max_items=1000):
     if not CLIENT_ID:
         raise RuntimeError("DIGIKEY_CLIENT_ID is missing.")
 
     token = get_access_token()
-
     url = f"{BASE_URL}/products/v4/search/keyword"
 
     headers = {
@@ -26,19 +26,46 @@ def search_products(keyword="Raspberry Pi"):
         "Accept": "application/json",
     }
 
-    payload = {
-        "Keywords": keyword,
-        "RecordCount": 100,
-    }
+    all_products = []
+    start = 0
+    page_size = 100
 
-    response = requests.post(url, json=payload, headers=headers, timeout=20)
+    while len(all_products) < max_items:
+        payload = {
+            "Keywords": keyword,
+            "RecordCount": page_size,
+            "RecordStartPosition": start,
+        }
 
-    if response.status_code != 200:
-        raise RuntimeError(
-            f"DigiKey product search failed ({response.status_code}): {response.text}"
-        )
+        response = requests.post(url, json=payload, headers=headers, timeout=30)
 
-    return response.json()
+        if response.status_code != 200:
+            raise RuntimeError(
+                f"DigiKey product search failed ({response.status_code}): {response.text}"
+            )
+
+        data = response.json()
+
+        if "Products" in data:
+            items = data.get("Products", [])
+        elif "ProductSearchResults" in data:
+            items = data["ProductSearchResults"].get("Products", [])
+        else:
+            items = []
+
+        if not items:
+            break
+
+        all_products.extend(items)
+        print(f"Loaded: {len(all_products)} items")
+
+        if len(items) < page_size:
+            break
+
+        start += page_size
+        time.sleep(0.3)
+
+    return {"Products": all_products[:max_items]}
 
 
 def normalize_products(data):
