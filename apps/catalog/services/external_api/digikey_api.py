@@ -28,7 +28,7 @@ def search_products(keyword="Raspberry Pi"):
 
     payload = {
         "Keywords": keyword,
-        "RecordCount": 5,
+        "RecordCount": 100,
     }
 
     response = requests.post(url, json=payload, headers=headers, timeout=20)
