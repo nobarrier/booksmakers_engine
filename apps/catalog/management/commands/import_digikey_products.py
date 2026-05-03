@@ -36,9 +36,17 @@ def ensure_unique_slug(base_slug, serial_number):
 class Command(BaseCommand):
     help = "Import products from DigiKey and save to DB"
 
-    def handle(self, *args, **kwargs):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--keyword",
+            type=str,
+            default="Raspberry Pi",
+            help="DigiKey search keyword",
+        )
 
-        # DigiKey 공급처 생성
+    def handle(self, *args, **kwargs):
+        keyword = kwargs["keyword"]
+
         supplier, _ = Supplier.objects.get_or_create(
             code="DIGIKEY",
             defaults={
@@ -47,16 +55,14 @@ class Command(BaseCommand):
             },
         )
 
-        raw = search_products("Raspberry Pi")
-
+        raw = search_products(keyword)
         products = normalize_products(raw)
 
-        print("\n===== IMPORT START =====\n")
+        print(f"\n===== IMPORT START: {keyword} =====\n")
 
         count = 0
 
         for item in products:
-
             serial_number = item.get("dk_part") or item.get("mpn")
 
             if not serial_number:
@@ -64,26 +70,24 @@ class Command(BaseCommand):
 
             manufacturer = item.get("manufacturer") or ""
             mpn = item.get("mpn") or ""
+            image_url = item.get("image") or ""
 
             canonical = None
 
-            # CanonicalProduct 자동 생성
             if manufacturer and mpn:
                 canonical, _ = CanonicalProduct.objects.get_or_create(
                     manufacturer=manufacturer,
                     mpn=mpn,
                     defaults={
                         "name": item.get("description") or mpn,
-                        "image_url": item.get("image") or "",  # ⭐ 이미지 저장
+                        "image_url": image_url,
                     },
                 )
 
-            # 카테고리 자동 분류
             from apps.catalog.models import Category
 
             category = auto_assign_category(item)
 
-            # fallback category
             if category is None:
                 category, _ = Category.objects.get_or_create(
                     name="Uncategorized",
@@ -95,33 +99,34 @@ class Command(BaseCommand):
                 serial_number,
             )
 
-            # Product 생성 / 업데이트
             obj, created = Product.objects.update_or_create(
                 serial_number=serial_number,
                 defaults={
                     "product_code": item.get("dk_part") or "",
                     "name": item.get("description") or serial_number,
                     "slug": slug_value,
-                    "price": item.get("price") or 0,
+                    "price": int(item.get("price") or 0),
                     "short_description": item.get("description") or "",
                     "brand": manufacturer,
                     "manufacturer": manufacturer,
                     "mpn": mpn,
                     "source_url": item.get("url") or "",
-                    "image_url": item.get("image") or "",  # ⭐ 이미지 저장
+                    "image_url": image_url,
+                    "source_supplier": "digikey",
+                    "source_category_path": item.get("category_path") or [],
                     "category": category,
                     "canonical": canonical,
+                    "is_active": True,
                 },
             )
 
-            # SupplierProduct 생성 (가격비교용)
             SupplierProduct.objects.update_or_create(
                 supplier=supplier,
                 supplier_part_number=serial_number,
                 defaults={
                     "product": obj,
-                    "price": item.get("price") or 0,
-                    "stock": item.get("stock") or 0,
+                    "price": float(item.get("price") or 0),
+                    "stock": int(item.get("stock") or 0),
                     "url": item.get("url") or "",
                 },
             )
