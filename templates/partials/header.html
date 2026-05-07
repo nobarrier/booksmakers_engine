@@ -7,30 +7,54 @@
         <div class="container">
 
             <div class="left">
-                <a href="{% url 'catalog:home' %}" class="home-icon-link" aria-label="홈">
-                    🏠
+                <a href="{% url 'catalog:home' %}" class="top-icon-link home-icon-link" aria-label="홈">
+                    <span class="top-icon">🏠</span>
+                    <span>홈</span>
                 </a>
             </div>
 
             <div class="right">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'users:mypage' %}">마이페이지</a>
-                    <a href="{% url 'logout' %}">로그아웃</a>
+                    <a href="{% url 'users:mypage' %}" class="top-icon-link">
+                        <span class="top-icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="{% url 'logout' %}" class="top-icon-link">
+                        <span class="top-icon">🚪</span>
+                        <span>로그아웃</span>
+                    </a>
                 {% else %}
-                    <a href="{% url 'accounts:login' %}">로그인</a>
-                    <a href="{% url 'users:signup' %}">회원가입</a>
+                    <a href="{% url 'accounts:login' %}" class="top-icon-link">
+                        <span class="top-icon">👤</span>
+                        <span>로그인</span>
+                    </a>
+                    <a href="{% url 'users:signup' %}" class="top-icon-link">
+                        <span class="top-icon">✨</span>
+                        <span>회원가입</span>
+                    </a>
                 {% endif %}
 
-                <a href="{% url 'accounts:order_history' %}">주문조회</a>
-                <a href="{% url 'accounts:support' %}">고객센터</a>
-                <a href="{% url 'cart:cart_view' %}" class="topbar-cart-link">
-                    장바구니 (
-                    {% if request.session.cart %}
-                        {{ request.session.cart|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                    )
+                <a href="{% url 'accounts:order_history' %}" class="top-icon-link">
+                    <span class="top-icon">📦</span>
+                    <span>주문조회</span>
+                </a>
+
+                <a href="{% url 'accounts:support' %}" class="top-icon-link">
+                    <span class="top-icon">🎧</span>
+                    <span>고객센터</span>
+                </a>
+
+                <a href="{% url 'cart:cart_view' %}" class="top-icon-link topbar-cart-link">
+                    <span class="top-icon">🛒</span>
+                    <span>
+                        장바구니 (
+                        {% if request.session.cart %}
+                            {{ request.session.cart|length }}
+                        {% else %}
+                            0
+                        {% endif %}
+                        )
+                    </span>
                 </a>
             </div>
 
