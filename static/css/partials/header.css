@@ -68,17 +68,23 @@
 
 .category-bar .top-dropdown {
     display: none;
+
     position: absolute;
-    top: 48px;
+
+    top: 100%;
     left: 0;
+
+    margin-top: -2px;
 
     min-width: 420px;
     max-width: calc(100vw - 40px);
 
-    padding: 14px;
+    padding: 10px 14px;
+
     background: #2e627a;
 
     border-radius: 0 0 12px 12px;
+
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
 
     flex-wrap: wrap;
@@ -87,8 +93,9 @@
     z-index: 9999;
 }
 
-.category-bar .menu-item:hover > .top-dropdown {
-    display: flex;
+.category-bar .menu-item {
+    position: relative;
+    padding-bottom: 2px;
 }
 
 /* =========================================
