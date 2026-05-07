@@ -91,39 +91,39 @@
 
 .search input {
     flex: 1;
-    height: 44px;
+    height: 46px;
     padding: 0 18px;
 
     border: 2px solid #2e627a;
     border-right: none;
-    border-radius: 8px 0 0 8px;
+
+    border-radius: 10px 0 0 10px;
 
     font-size: 15px;
+    color: #222;
+
     outline: none;
     background: #ffffff;
-
-    box-shadow: 0 2px 8px rgba(46, 98, 122, 0.12);
 }
 
 .search input:focus {
-    border-color: #174e63;
-    box-shadow: 0 0 0 3px rgba(46, 98, 122, 0.12);
+    border-color: #2e627a;
 }
 
 .search button {
-    width: 72px;
-    height: 44px;
+    width: 90px;
+    height: 46px;
 
-    border: none;
-    border-radius: 0 8px 8px 0;
+    border: 2px solid #2e627a;
+    border-left: none;
 
-    background: #174e63;
+    border-radius: 0 10px 10px 0;
+
+    background: #2e627a;
     color: #ffffff;
 
     font-weight: 700;
     cursor: pointer;
-
-    transition: background 0.18s ease;
 }
 
 .search button:hover {
