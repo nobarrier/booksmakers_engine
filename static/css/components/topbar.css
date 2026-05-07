@@ -141,16 +141,27 @@
 }
 
 .cart a {
-    color: #e5a400;
+    display: inline-flex;
+    align-items: center;
+
+    padding: 8px 12px;
+    border-radius: 8px;
+
+    color: #174e63;
+    background: rgba(46, 98, 122, 0.08);
+
     font-weight: 700;
+    font-size: 14px;
     text-decoration: none;
     white-space: nowrap;
 
-    transition: color 0.18s ease;
+    transition: background 0.18s ease,
+    color 0.18s ease;
 }
 
 .cart a:hover {
-    color: #c78700;
+    color: #174e63;
+    background: rgba(46, 98, 122, 0.14);
 }
 
 /* =========================================
