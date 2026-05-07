@@ -7,7 +7,7 @@
         <div class="container">
 
             <div class="left">
-                <a href="{% url 'catalog:home' %}" class="home-icon-link">
+                <a href="{% url 'catalog:home' %}" class="home-icon-link" aria-label="홈">
                     🏠
                 </a>
             </div>
@@ -23,7 +23,7 @@
 
                 <a href="{% url 'accounts:order_history' %}">주문조회</a>
                 <a href="{% url 'accounts:support' %}">고객센터</a>
-                <a href="{% url 'cart:cart_view' %}">
+                <a href="{% url 'cart:cart_view' %}" class="topbar-cart-link">
                     장바구니 (
                     {% if request.session.cart %}
                         {{ request.session.cart|length }}
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <!-- 2. Logo + Search + Cart -->
+    <!-- 2. Logo + Search -->
     <div class="header-main">
         <div class="container">
 
@@ -58,7 +58,6 @@
                     <button type="submit">검색</button>
                 </form>
             </div>
-
 
         </div>
     </div>
@@ -98,7 +97,6 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-
                     </li>
                 {% endfor %}
             </ul>
