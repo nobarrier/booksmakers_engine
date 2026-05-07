@@ -20,7 +20,7 @@ select {
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     background-color: #f4f6f9;
 }
 
@@ -72,4 +72,14 @@ a:visited {
     background: #2e627a;
     color: #ffffff;
     font-weight: 700;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select,
+a {
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif !important;
 }
