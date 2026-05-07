@@ -1,110 +1,60 @@
 /* =========================================
-   TOPBAR FLYOUT VERSION (FINAL STABLE)
+   TOPBAR
 ========================================= */
 
-.category-bar {
-    background: #2e627a;
-    position: relative;
+.topbar {
+    height: 28px;
+    background: #f4f6f8;
+    font-size: 13px;
+    color: #333;
 }
 
-.category-bar .main-menu {
-    list-style: none;
+.topbar .container {
+    max-width: 1180px;
+    height: 28px;
+    margin: 0 auto;
+    padding: 0 16px;
+
     display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.category-bar .menu-item {
-    position: relative;
-}
-
-.category-bar .menu-item > a {
-    color: #ffffff;
-    padding: 12px 0;
-    display: block;
-    font-weight: 600;
+.topbar a {
+    color: #333;
     text-decoration: none;
+    margin-right: 12px;
 }
 
-.category-bar .menu-item > a:hover {
-    color: #ffd54f;
-}
-
-/* =========================
-   2차 (Flyout)
-========================= */
-
-.category-bar .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-
-    min-width: 220px;
-    background: #225a75;
-    padding: 10px 0;
-    border-radius: 8px;
-}
-
-/* =========================
-   3차 (Flyout)
-========================= */
-
-.category-bar .sub-dropdown {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 100%;
-
-    min-width: 220px;
-    background: #27647e;
-    padding: 10px 0;
-    border-radius: 8px;
-}
-
-/* JS가 붙이는 open 클래스 기반 */
-.category-bar li.open > .dropdown,
-.category-bar li.open > .sub-dropdown {
-    display: block;
-}
-
-/* 항목 */
-.category-bar .dropdown li,
-.category-bar .sub-dropdown li {
-    padding: 6px 16px;
-}
-
-.category-bar .dropdown a,
-.category-bar .sub-dropdown a {
-    color: #ffffff;
-    text-decoration: none;
-    display: block;
-}
-
-.category-bar .dropdown a:hover,
-.category-bar .sub-dropdown a:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
-
-/* Active */
-.category-bar .menu-item > a.active {
-    color: #ffd54f;
+.topbar a:hover {
+    color: #2e627a;
     font-weight: 700;
 }
 
+.topbar .left,
+.topbar .right {
+    display: flex;
+    align-items: center;
+}
+
 /* =========================================
-   HEADER MAIN (로고 + 검색 + 장바구니)
+   HEADER MAIN
 ========================================= */
 
 .header-main {
-    padding: 16px 0;
+    background: #f4f7fb;
+    padding: 18px 0 16px;
 }
 
 .header-main .container {
-    display: flex;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    display: grid;
+    grid-template-columns: 180px 1fr 140px;
     align-items: center;
-    gap: 20px;
+    column-gap: 28px;
 }
 
 .logo {
@@ -112,13 +62,80 @@
     align-items: center;
 }
 
+.site-logo-img,
 .logo img {
-    height: 50px;
+    height: 54px;
     width: auto;
+    display: block;
 }
 
+/* =========================================
+   SEARCH
+========================================= */
+
 .search {
+    width: 100%;
+}
+
+.search form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search input {
     flex: 1;
-    max-width: 600px;
-    margin: 0 20px;
+    height: 44px;
+    padding: 0 18px;
+
+    border: 1px solid #dce3e8;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+
+    font-size: 15px;
+    outline: none;
+    background: #ffffff;
+}
+
+.search input:focus {
+    border-color: #2e627a;
+}
+
+.search button {
+    width: 72px;
+    height: 44px;
+
+    border: none;
+    border-radius: 0 8px 8px 0;
+
+    background: #174e63;
+    color: #ffffff;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background: #123f50;
+}
+
+/* =========================================
+   CART
+========================================= */
+
+.cart {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.cart a {
+    color: #e5a400;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cart a:hover {
+    color: #c78700;
 }

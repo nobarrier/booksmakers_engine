@@ -2,7 +2,7 @@
 
 <header class="header">
 
-    <!-- 1. 상단바 -->
+    <!-- 1. Topbar -->
     <div class="topbar">
         <div class="container">
 
@@ -11,7 +11,6 @@
             </div>
 
             <div class="right">
-
                 {% if user.is_authenticated %}
                     <a href="{% url 'users:mypage' %}">마이페이지</a>
                     <a href="{% url 'logout' %}">로그아웃</a>
@@ -23,27 +22,25 @@
                 <a href="{% url 'accounts:order_history' %}">주문조회</a>
                 <a href="{% url 'accounts:support' %}">고객센터</a>
                 <a href="{% url 'cart:cart_view' %}">장바구니</a>
-
             </div>
 
         </div>
     </div>
 
-
-    <!-- 2. 로고 + 검색 + 장바구니 -->
+    <!-- 2. Logo + Search + Cart -->
     <div class="header-main">
         <div class="container">
 
             <div class="logo">
                 <a href="{% url 'catalog:home' %}">
                     <img src="{% static 'img/logo/jparts_logo_01.png' %}?v=20260413"
-                         style="height:50px; width:auto;"
-                         alt="logo">
+                         class="site-logo-img"
+                         alt="JPARTS">
                 </a>
             </div>
 
             <div class="search">
-                <form method="get">
+                <form method="get" action="{% url 'catalog:home' %}">
                     <input type="text"
                            name="q"
                            placeholder="부품 · 키트 · 교육 검색"
@@ -67,28 +64,27 @@
         </div>
     </div>
 
-
-    <!-- 3. 카테고리 바 -->
-    <div class="category-bar">
+    <!-- 3. Category Bar -->
+    <nav class="category-bar">
         <div class="container">
 
             <ul class="main-menu">
                 {% for category in categories %}
                     <li class="menu-item">
-                        <a href="{% url 'catalog:category' category.slug %}">{{ category.name }}</a>
+                        <a href="{% url 'catalog:category' category.slug %}">
+                            {{ category.name }}
+                        </a>
 
                         {% if category.children.all %}
                             <div class="top-dropdown">
                                 {% for child in category.children.all %}
                                     <div class="mega-column">
 
-                                        <!-- 2차 -->
                                         <a class="level2"
                                            href="{% url 'catalog:category' child.slug %}">
                                             {{ child.name }}
                                         </a>
 
-                                        <!-- 3차: 기본 숨김, 2차 hover 시만 표시 -->
                                         {% if child.children.all %}
                                             <div class="level3-group">
                                                 {% for sub in child.children.all %}
@@ -109,6 +105,6 @@
             </ul>
 
         </div>
-    </div>
+    </nav>
 
 </header>
