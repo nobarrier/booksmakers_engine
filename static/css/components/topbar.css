@@ -143,12 +143,15 @@
 .cart a {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
 
-    padding: 8px 12px;
+    height: 40px;
+    padding: 0 16px;
+
     border-radius: 8px;
 
-    color: #174e63;
-    background: rgba(46, 98, 122, 0.08);
+    background: #2e627a;
+    color: #ffffff;
 
     font-weight: 700;
     font-size: 14px;
@@ -156,12 +159,12 @@
     white-space: nowrap;
 
     transition: background 0.18s ease,
-    color 0.18s ease;
+    opacity 0.18s ease;
 }
 
 .cart a:hover {
-    color: #174e63;
-    background: rgba(46, 98, 122, 0.14);
+    background: #2e627a;
+    opacity: 0.88;
 }
 
 /* =========================================
