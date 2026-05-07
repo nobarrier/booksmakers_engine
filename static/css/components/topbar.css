@@ -3,15 +3,15 @@
 ========================================= */
 
 .topbar {
-    height: 28px;
-    background: #f4f6f8;
+    height: 30px;
+    background: #f4f7fb;
     font-size: 13px;
     color: #333;
 }
 
 .topbar .container {
     max-width: 1180px;
-    height: 28px;
+    height: 30px;
     margin: 0 auto;
     padding: 0 16px;
 
@@ -24,17 +24,15 @@
 .topbar .right {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .topbar a {
-    color: #333;
+    color: #222;
     text-decoration: none;
-    margin-right: 12px;
-    transition: color 0.18s ease;
-}
-
-.topbar a:last-child {
-    margin-right: 0;
+    margin: 0;
+    line-height: 30px;
+    white-space: nowrap;
 }
 
 .topbar a:hover {
