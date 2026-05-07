@@ -60,6 +60,12 @@
 .category-bar .menu-item > a.active {
     background: rgba(255, 255, 255, 0.12);
     color: #ffffff;
+    box-shadow: none;
+}
+
+.category-bar .level2:hover,
+.category-bar .level3-group a:hover {
+    color: #ffffff;
 }
 
 /* =========================================
