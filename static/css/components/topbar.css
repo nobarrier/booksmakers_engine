@@ -75,60 +75,6 @@
     display: block;
 }
 
-/* =========================================
-   SEARCH
-========================================= */
-
-.search {
-    width: 100%;
-}
-
-.search form {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.search input {
-    flex: 1;
-    height: 46px;
-    padding: 0 18px;
-
-    border: 2px solid #2e627a;
-    border-right: none;
-
-    border-radius: 10px 0 0 10px;
-
-    font-size: 15px;
-    color: #222;
-
-    outline: none;
-    background: #ffffff;
-}
-
-.search input:focus {
-    border-color: #2e627a;
-}
-
-.search button {
-    width: 90px;
-    height: 46px;
-
-    border: 2px solid #2e627a;
-    border-left: none;
-
-    border-radius: 0 10px 10px 0;
-
-    background: #2e627a;
-    color: #ffffff;
-
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.search button:hover {
-    background: #123f50;
-}
 
 /* =========================================
    CART
