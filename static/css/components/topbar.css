@@ -153,11 +153,16 @@
     color: #c78700;
 }
 
+/* =========================================
+   HOME ICON
+========================================= */
 
 .home-icon-link {
     font-size: 18px;
     line-height: 1;
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .home-icon-link:hover {
