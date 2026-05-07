@@ -56,3 +56,31 @@
 .search button:hover {
     opacity: 0.92;
 }
+
+.header-main .search form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 820px;
+    border: 2px solid #2e627a !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.header-main .search input {
+    height: 46px;
+    border: none !important;
+    outline: none;
+    background: #ffffff;
+    font-size: 15px;
+}
+
+.header-main .search button {
+    width: 90px;
+    height: 46px;
+    border: none !important;
+    background: #2e627a;
+    color: #ffffff;
+    font-weight: 700;
+}
