@@ -20,21 +20,25 @@
     justify-content: space-between;
 }
 
-.topbar a {
-    color: #333;
-    text-decoration: none;
-    margin-right: 12px;
-}
-
-.topbar a:hover {
-    color: #2e627a;
-    font-weight: 700;
-}
-
 .topbar .left,
 .topbar .right {
     display: flex;
     align-items: center;
+}
+
+.topbar a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 12px;
+    transition: color 0.18s ease;
+}
+
+.topbar a:last-child {
+    margin-right: 0;
+}
+
+.topbar a:hover {
+    color: #2e627a;
 }
 
 /* =========================================
@@ -56,6 +60,10 @@
     align-items: center;
     column-gap: 28px;
 }
+
+/* =========================================
+   LOGO
+========================================= */
 
 .logo {
     display: flex;
@@ -113,6 +121,8 @@
 
     font-weight: 700;
     cursor: pointer;
+
+    transition: background 0.18s ease;
 }
 
 .search button:hover {
@@ -134,6 +144,8 @@
     font-weight: 700;
     text-decoration: none;
     white-space: nowrap;
+
+    transition: color 0.18s ease;
 }
 
 .cart a:hover {
