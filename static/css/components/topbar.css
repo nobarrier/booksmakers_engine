@@ -94,13 +94,16 @@
     height: 44px;
     padding: 0 18px;
 
-    border: 1px solid #dce3e8;
+    border: 2px solid #2e627a;
     border-right: none;
-    border-radius: 8px 0 0 8px;
+
+    border-radius: 10px 0 0 10px;
 
     font-size: 15px;
     outline: none;
     background: #ffffff;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .search input:focus {
@@ -148,4 +151,15 @@
 
 .cart a:hover {
     color: #c78700;
+}
+
+
+.home-icon-link {
+    font-size: 18px;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.home-icon-link:hover {
+    opacity: 0.8;
 }
