@@ -125,3 +125,36 @@
 .product-detail-page .product-actions .btn-primary:hover {
     background: #244f63;
 }
+
+
+/* 주문하기 버튼 */
+.cart-order-btn,
+.cart button[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 160px;
+    height: 48px;
+    padding: 0 24px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2e627a;
+    color: #ffffff !important;
+
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.cart-order-btn:hover,
+.cart button[type="submit"]:hover {
+    background: #244f63;
+}
