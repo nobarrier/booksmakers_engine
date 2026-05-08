@@ -128,15 +128,15 @@
 
 
 /* 주문하기 버튼 */
-.cart-order-btn,
-.cart button[type="submit"] {
+a.cart-order-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-width: 160px;
-    height: 48px;
-    padding: 0 24px;
+    min-width: 180px;
+    height: 52px;
+    padding: 0 28px;
+    margin-top: 18px;
 
     border: none;
     border-radius: 8px;
@@ -144,17 +144,17 @@
     background: #2e627a;
     color: #ffffff !important;
 
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     line-height: 1;
 
-    text-decoration: none;
+    text-decoration: none !important;
     cursor: pointer;
 
     transition: background 0.2s ease;
 }
 
-.cart-order-btn:hover,
-.cart button[type="submit"]:hover {
+a.cart-order-btn:hover {
     background: #244f63;
+    color: #ffffff !important;
 }
