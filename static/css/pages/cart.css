@@ -1,18 +1,6 @@
-북스형, 아래 전체를 그대로 ` static /css/ pages
-
-/
-cart.css` 에 교체하면 돼.
-
-`
-cart-order-btn` 오타 없이 정리한 최종본이야.
-
-`
-`
-`
-css
-    /* =========================================
-       CART PAGE
-    ========================================= */
+/* =========================================
+   CART PAGE
+========================================= */
 .cart-page {
     max-width: 900px;
     margin: 60px auto;
@@ -210,7 +198,3 @@ a.cart-order-btn:hover {
 .product-detail-page .product-actions .btn-primary:hover {
     background: #244f63;
 }
-
-`
-`
-`
