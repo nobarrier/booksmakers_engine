@@ -42,3 +42,31 @@
 .cart a:hover {
     text-decoration: underline;
 }
+
+.cart-table a,
+.cart-table button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    height: 28px;
+    padding: 0 10px;
+
+    border: none;
+    border-radius: 4px;
+    background: #2e627a;
+    color: #ffffff !important;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cart-table a:hover,
+.cart-table button:hover {
+    background: #244f63;
+    color: #ffffff !important;
+}
