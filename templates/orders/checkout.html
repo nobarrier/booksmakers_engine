@@ -1,72 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="checkout-page">
+    <h2>주문서 작성</h2>
 
-        <h2 class="checkout-title">주문서 작성</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>이름: <input type="text" name="name" required></p>
+        <p>전화번호: <input type="text" name="phone" required></p>
+        <p>주소: <textarea name="address" required></textarea></p>
 
-        <form method="post" class="checkout-form">
-            {% csrf_token %}
-
-            <div class="form-row">
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="form-row">
-                <label for="phone">전화번호</label>
-                <input type="text" id="phone" name="phone" required>
-            </div>
-
-            <div class="form-row form-row-address">
-                <label for="address">주소</label>
-                <textarea id="address" name="address" rows="4" required></textarea>
-            </div>
-
-            <div class="checkout-actions">
-                <button type="button" class="checkout-submit-btn" onclick="requestPay()">
-                    결제하기
-                </button>
-            </div>
-        </form>
-
-    </div>
+        <button type="button" onclick="requestPay()">결제하기</button>
+    </form>
 
     <script src="https://js.tosspayments.com/v1/payment"></script>
 
     <script>
         function requestPay() {
-            const nameInput = document.querySelector('input[name="name"]');
-            const phoneInput = document.querySelector('input[name="phone"]');
-            const addressInput = document.querySelector('textarea[name="address"]');
+            var clientKey = "test_ck_여기에_키";  // 토스 테스트 키
 
-            if (!nameInput.value.trim()) {
-                alert("이름을 입력해 주세요.");
-                nameInput.focus();
-                return;
-            }
-
-            if (!phoneInput.value.trim()) {
-                alert("전화번호를 입력해 주세요.");
-                phoneInput.focus();
-                return;
-            }
-
-            if (!addressInput.value.trim()) {
-                alert("주소를 입력해 주세요.");
-                addressInput.focus();
-                return;
-            }
-
-            const clientKey = "test_ck_여기에_키";
-
-            const tossPayments = TossPayments(clientKey);
+            var tossPayments = TossPayments(clientKey);
 
             tossPayments.requestPayment("카드", {
                 amount: 1000,
                 orderId: "ORDER_" + new Date().getTime(),
                 orderName: "테스트 상품",
-                customerName: nameInput.value.trim(),
+                customerName: document.querySelector('input[name="name"]').value,
+
                 successUrl: "https://jparts.kr/pay/success/",
                 failUrl: "https://jparts.kr/pay/fail/"
             });
