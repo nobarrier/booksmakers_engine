@@ -1,14 +1,10 @@
-북스형,
+북스형, 아래 전체를 그대로 ` static /css/ pages
+
+/
+cart.css` 에 교체하면 돼.
 
 `
-static /css/ pages
-
-/
-cart.css` 전체를 아래로 교체해줘.
-중복
-
-/
-충돌 줄이고 장바구니 페이지랑 상품 상세 버튼까지 같이 정리했어.
+cart-order-btn` 오타 없이 정리한 최종본이야.
 
 `
 `
