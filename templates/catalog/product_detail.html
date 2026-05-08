@@ -1,125 +1,127 @@
 {% extends "base.html" %}
-
-{% block title %}{{ product.name }}{% endblock %}
+{% load static %}
 
 {% block content %}
+    <div class="product-detail-page">
 
-    <article class="product-detail">
-
-        <div class="product-detail__media">
-            {% if product.image_url %}
-                <img src="{{ product.image_url }}" alt="{{ product.name }}">
-            {% elif product.images.all %}
-                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}">
-            {% else %}
-                <div class="product-detail__placeholder">NO IMAGE</div>
+        <div class="product-breadcrumb">
+            <a href="{% url 'catalog:home' %}">홈</a>
+            <span>›</span>
+            {% if product.category %}
+                <a href="{% url 'catalog:category' product.category.slug %}">
+                    {{ product.category.name }}
+                </a>
             {% endif %}
         </div>
 
-        <div class="product-detail__info">
+        <section class="product-detail-layout">
 
-            <p class="product-detail__category">{{ product.category.name }}</p>
+            <!-- LEFT: IMAGE -->
+            <div class="product-image-area">
+                <div class="product-main-image">
+                    {% if product.image_url %}
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'img/no-image.png' %}" alt="No image">
+                    {% endif %}
+                </div>
 
-            <h1>{{ product.name }}</h1>
+                <div class="image-notice">
+                    위 상품 이미지는 참고용 대표 이미지이며,<br>
+                    정확한 사양은 데이터시트에서 확인하세요.
+                </div>
+            </div>
 
-            <p class="product-detail__price">{{ product.price }} KRW</p>
+            <!-- RIGHT: INFO -->
+            <div class="product-info-area">
 
-            <p class="product-detail__desc">
-                {{ product.description|default:"No description available." }}
-            </p>
+                <div class="product-category-name">
+                    {% if product.category %}
+                        {{ product.category.name }}
+                    {% endif %}
+                </div>
 
-            <a class="product-detail__back" href="{% url 'catalog:home' %}">
-                Back to products
-            </a>
+                <h1 class="product-title">{{ product.name }}</h1>
 
-            <a href="{% url 'cart:cart_add' product.id %}">
-                <button type="button">장바구니 담기</button>
-            </a>
+                <p class="product-desc">
+                    {% if product.short_description %}
+                        {{ product.short_description }}
+                    {% else %}
+                        No description available.
+                    {% endif %}
+                </p>
 
-            <a href="{% url 'cart:cart_add' product.id %}?next=checkout">
-                <button type="button">바로구매</button>
-            </a>
+                <div class="product-meta-table">
+                    <div class="meta-row">
+                        <div class="meta-label">상품번호</div>
+                        <div class="meta-value">{{ product.serial_number }}</div>
+                    </div>
 
-        </div>
+                    <div class="meta-row">
+                        <div class="meta-label">제조사</div>
+                        <div class="meta-value">{{ product.manufacturer|default:"-" }}</div>
+                    </div>
 
-    </article>
+                    <div class="meta-row">
+                        <div class="meta-label">MPN</div>
+                        <div class="meta-value">{{ product.mpn|default:"-" }}</div>
+                    </div>
 
+                    <div class="meta-row">
+                        <div class="meta-label">판매가</div>
+                        <div class="meta-value product-price">{{ product.price }} KRW</div>
+                    </div>
+                </div>
 
-    <!-- ===================== -->
-    <!-- JPARTS 공급 정보 -->
-    <!-- ===================== -->
+                <div class="product-actions">
+                    <a href="{% url 'cart:add_to_cart' product.id %}" class="btn-outline">
+                        장바구니
+                    </a>
+                    <a href="#" class="btn-primary">
+                        바로구매
+                    </a>
+                </div>
 
-    <section class="price-compare">
+                <div class="supplier-section">
+                    <h2>공급 정보</h2>
 
-        <h2>공급 정보</h2>
+                    <table class="supplier-table">
+                        <thead>
+                        <tr>
+                            <th>공급처</th>
+                            <th>참고가</th>
+                            <th>재고</th>
+                            <th>구매</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for sp in prices %}
+                            <tr>
+                                <td>{{ sp.supplier.name }}</td>
+                                <td class="supplier-price">{{ sp.price }} KRW</td>
+                                <td>{{ sp.stock }}</td>
+                                <td>
+                                    {% if sp.url %}
+                                        <a href="{{ sp.url }}" target="_blank" class="supplier-buy-btn">
+                                            구매
+                                        </a>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">공급 정보가 없습니다.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-        <table class="price-table">
+            </div>
 
-            <thead>
-            <tr>
-                <th>공급처</th>
-                <th>참고가</th>
-                <th>재고</th>
-                <th>구매</th>
-            </tr>
-            </thead>
+        </section>
 
-            <tbody>
-
-            {% for sp in prices %}
-
-                <tr>
-
-                    <td>
-                        {{ sp.supplier.name }}
-                    </td>
-
-                    <td>
-                        {% if forloop.first %}
-                            <span class="best-price">🔥 {{ sp.price }} KRW</span>
-                        {% else %}
-                            {{ sp.price }} KRW
-                        {% endif %}
-                    </td>
-
-                    <td>
-                        {% if sp.stock > 0 %}
-                            {{ sp.stock }}
-                        {% else %}
-                            품절
-                        {% endif %}
-                    </td>
-
-                    <td>
-                        {% if sp.stock > 0 %}
-                            <a href="{% url 'cart:cart_add' product.id %}" class="buy-btn">
-                                JPARTS 구매
-                            </a>
-                        {% else %}
-                            <span class="soldout-btn">품절</span>
-                        {% endif %}
-                    </td>
-
-                </tr>
-
-            {% empty %}
-
-                <tr>
-                    <td colspan="4">
-                        공급 정보 없음
-                    </td>
-                </tr>
-
-            {% endfor %}
-
-            </tbody>
-
-        </table>
-
-        <p style="margin-top:12px; font-size:13px; color:#666;">
-            ※ 표시된 가격과 재고는 참고용이며, 실제 주문 가능 여부는 JPARTS 주문 확인 후 확정됩니다.
-        </p>
-
-    </section>
-
+    </div>
 {% endblock %}
