@@ -19,6 +19,7 @@
     background-color: #f5f5f5;
 }
 
+/* 기본 cart 버튼 */
 .cart-btn {
     padding: 4px 8px;
     background-color: #3b6d80;
@@ -32,7 +33,7 @@
     background-color: #2a4f5c;
 }
 
-
+/* cart 내부 링크 */
 .cart a {
     color: #ffd86b;
     font-weight: 600;
@@ -43,8 +44,9 @@
     text-decoration: underline;
 }
 
-.cart-table a,
-.cart-table button {
+/* 장바구니 테이블 버튼 */
+.cart-table td a,
+.cart-table td button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -65,8 +67,61 @@
     cursor: pointer;
 }
 
-.cart-table a:hover,
-.cart-table button:hover {
+.cart-table td a:hover,
+.cart-table td button:hover {
     background: #244f63;
     color: #ffffff !important;
+}
+
+/* 상품 상세 페이지 버튼 복구 */
+.product-detail-page .product-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.product-detail-page .product-actions form {
+    flex: 1;
+}
+
+.product-detail-page .product-actions .btn-outline,
+.product-detail-page .product-actions .btn-primary,
+.product-detail-page .product-actions button {
+    width: 100%;
+    height: 58px;
+    padding: 0 28px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 장바구니 담기 */
+.product-detail-page .product-actions .btn-outline {
+    border: 2px solid #2e627a;
+    background: #ffffff;
+    color: #2e627a !important;
+}
+
+.product-detail-page .product-actions .btn-outline:hover {
+    background: #eef5f8;
+}
+
+/* 바로구매 */
+.product-detail-page .product-actions .btn-primary {
+    border: none;
+    background: #2e627a;
+    color: #ffffff !important;
+}
+
+.product-detail-page .product-actions .btn-primary:hover {
+    background: #244f63;
 }
