@@ -223,3 +223,39 @@
     font-size: 13px;
     font-weight: 700;
 }
+
+
+.product-actions form {
+    width: 100%;
+}
+
+.product-actions button {
+    width: 100%;
+    border: none;
+}
+
+.btn-outline,
+.btn-primary {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.btn-outline {
+    border: 1px solid #2e627a !important;
+    background: #ffffff;
+    color: #2e627a;
+}
+
+.btn-primary {
+    border: 1px solid #2e627a !important;
+    background: #2e627a;
+    color: #ffffff;
+}
