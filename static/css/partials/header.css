@@ -20,10 +20,10 @@
     align-items: center;
     justify-content: center;
 
+    height: 48px;
     margin: 0;
     padding: 0;
 
-    height: 48px;
     overflow: visible;
     white-space: nowrap;
 }
@@ -43,6 +43,8 @@
     margin: 0 2px;
 
     color: #ffffff;
+    background: transparent;
+
     font-weight: 700;
     font-size: 14px;
     line-height: 1.2;
@@ -68,34 +70,42 @@
 
 .category-bar .top-dropdown {
     display: none;
-
     position: absolute;
 
     top: 100%;
     left: 0;
 
-    margin-top: -2px;
-
     min-width: 420px;
     max-width: calc(100vw - 40px);
 
-    padding: 10px 14px;
-
+    padding: 10px;
     background: #2e627a;
 
-    border-radius: 0 0 12px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
 
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
 
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 
     z-index: 9999;
 }
 
-.category-bar .menu-item {
-    position: relative;
-    padding-bottom: 2px;
+/* 핵심: 이게 빠지면 2차 카테고리 안 보임 */
+.category-bar .menu-item:hover > .top-dropdown {
+    display: flex;
+}
+
+/* hover 끊김 방지용 투명 연결 영역 */
+.category-bar .top-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 0;
+    right: 0;
+    height: 6px;
 }
 
 /* =========================================
@@ -112,9 +122,10 @@
 .category-bar .level3-group a {
     display: flex;
     align-items: center;
+    justify-content: center;
 
-    min-height: 38px;
-    padding: 0 14px;
+    min-height: 40px;
+    padding: 0 16px;
 
     color: #ffffff;
     background: transparent;
@@ -138,7 +149,6 @@
 .category-bar .level3-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     margin-top: 6px;
-    padding-left: 8px;
 }
