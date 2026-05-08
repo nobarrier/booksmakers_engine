@@ -44,7 +44,24 @@
                     총 금액: <strong>{{ total_price }} 원</strong>
                 </div>
 
-                <a href="{% url 'orders:checkout' %}" class="cart-order-btn">
+                <a href="{% url 'orders:checkout' %}"
+                   class="cart-order-btn jparts-order-btn"
+                   style="
+                   display:inline-flex;
+                   align-items:center;
+                   justify-content:center;
+                   min-width:180px;
+                   height:52px;
+                   padding:0 28px;
+                   border-radius:8px;
+                   background:#2e627a;
+                   color:#ffffff;
+                   font-size:18px;
+                   font-weight:800;
+                   line-height:1;
+                   text-decoration:none;
+                   cursor:pointer;
+               ">
                     주문하기
                 </a>
             </div>
