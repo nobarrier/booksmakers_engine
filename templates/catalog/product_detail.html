@@ -108,13 +108,19 @@
                 </div>
 
                 <div class="product-actions">
-                    <a href="{% url 'cart:cart_view' %}" class="btn-outline">
-                        장바구니 보기
-                    </a>
+                    <form method="post" action="{% url 'cart:cart_add' product.id %}" class="product-action-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-outline">
+                            장바구니 담기
+                        </button>
+                    </form>
 
-                    <a href="{% url 'cart:cart_view' %}" class="btn-primary">
-                        바로구매
-                    </a>
+                    <form method="post" action="{% url 'cart:cart_add' product.id %}" class="product-action-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-primary">
+                            바로구매
+                        </button>
+                    </form>
                 </div>
 
                 {% if product.detail_html %}
