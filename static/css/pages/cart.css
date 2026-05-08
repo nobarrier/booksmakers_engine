@@ -1,79 +1,170 @@
-.cart {
-    white-space: nowrap;
+북스형,
+
+`
+static /css/ pages
+
+/
+cart.css` 전체를 아래로 교체해줘.
+중복
+
+/
+충돌 줄이고 장바구니 페이지랑 상품 상세 버튼까지 같이 정리했어.
+
+`
+`
+`
+css
+    /* =========================================
+       CART PAGE
+    ========================================= */
+.cart-page {
+    max-width: 900px;
+    margin: 60px auto;
+}
+
+.cart-title {
+    margin-bottom: 20px;
+    color: #1f2933;
+    font-size: 26px;
+    font-weight: 800;
 }
 
 .cart-table {
-    width: 600px;
+    width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background: #ffffff;
+    border: 1px solid #d8e2e8;
 }
 
 .cart-table th,
 .cart-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
+    border: 1px solid #d8e2e8;
+    padding: 14px 16px;
     text-align: center;
+    vertical-align: middle;
 }
 
 .cart-table th {
-    background-color: #f5f5f5;
+    background: #f1f5f7;
+    color: #1f2933;
+    font-size: 14px;
+    font-weight: 800;
 }
 
-/* 기본 cart 버튼 */
-.cart-btn {
-    padding: 4px 8px;
-    background-color: #3b6d80;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    margin: 0 4px;
-}
-
-.cart-btn:hover {
-    background-color: #2a4f5c;
-}
-
-/* cart 내부 링크 */
-.cart a {
-    color: #ffd86b;
+.cart-table td {
+    color: #1f2933;
+    font-size: 14px;
     font-weight: 600;
-    text-decoration: none;
 }
 
-.cart a:hover {
-    text-decoration: underline;
+.cart-product-name {
+    text-align: left;
+    font-weight: 700;
 }
 
-/* 장바구니 테이블 버튼 */
+.cart-quantity {
+    display: inline-flex;
+    min-width: 24px;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.cart-price {
+    font-weight: 800;
+}
+
+.cart-btn,
 .cart-table td a,
 .cart-table td button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-width: 36px;
+    min-width: 34px;
     height: 28px;
     padding: 0 10px;
+    margin: 0 3px;
 
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     background: #2e627a;
     color: #ffffff !important;
 
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1;
-    text-decoration: none;
+    text-decoration: none !important;
     cursor: pointer;
 }
 
+.cart-btn:hover,
 .cart-table td a:hover,
 .cart-table td button:hover {
     background: #244f63;
     color: #ffffff !important;
 }
 
-/* 상품 상세 페이지 버튼 복구 */
+.cart-remove-btn {
+    min-width: 50px;
+}
+
+.cart-summary {
+    margin-top: 24px;
+}
+
+.cart-total {
+    margin-bottom: 16px;
+    color: #1f2933;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.cart-order-btn,
+a.cart-order-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 180px;
+    height: 52px;
+    padding: 0 28px;
+
+    border: none;
+    border-radius: 8px;
+    background: #2e627a;
+    color: #ffffff !important;
+
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none !important;
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.cart-order-btn:hover,
+a.cart-order-btn:hover {
+    background: #244f63;
+    color: #ffffff !important;
+}
+
+.cart-empty {
+    padding: 40px;
+    background: #ffffff;
+    border: 1px solid #d8e2e8;
+    border-radius: 10px;
+    color: #1f2933;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* =========================================
+   PRODUCT DETAIL ACTION BUTTONS
+========================================= */
+
 .product-detail-page .product-actions {
     display: flex;
     gap: 16px;
@@ -104,7 +195,6 @@
     text-decoration: none;
 }
 
-/* 장바구니 담기 */
 .product-detail-page .product-actions .btn-outline {
     border: 2px solid #2e627a;
     background: #ffffff;
@@ -115,7 +205,6 @@
     background: #eef5f8;
 }
 
-/* 바로구매 */
 .product-detail-page .product-actions .btn-primary {
     border: none;
     background: #2e627a;
@@ -126,35 +215,6 @@
     background: #244f63;
 }
 
-
-/* 주문하기 버튼 */
-a.cart-order-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 180px;
-    height: 52px;
-    padding: 0 28px;
-    margin-top: 18px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: #2e627a;
-    color: #ffffff !important;
-
-    font-size: 18px;
-    font-weight: 800;
-    line-height: 1;
-
-    text-decoration: none !important;
-    cursor: pointer;
-
-    transition: background 0.2s ease;
-}
-
-a.cart-order-btn:hover {
-    background: #244f63;
-    color: #ffffff !important;
-}
+`
+`
+`

@@ -21,7 +21,7 @@
                     <tr>
                         <td class="cart-product-name">{{ product.name }}</td>
 
-                        <td>
+                        <td class="cart-quantity-cell">
                             <a class="cart-btn" href="{% url 'cart:cart_decrease' product.id %}">-</a>
                             <span class="cart-quantity">{{ product.total_quantity }}</span>
                             <a class="cart-btn" href="{% url 'cart:cart_increase' product.id %}">+</a>
