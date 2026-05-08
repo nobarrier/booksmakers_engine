@@ -1,6 +1,7 @@
 /* =========================================
    CART PAGE
 ========================================= */
+
 .cart-page {
     max-width: 900px;
     margin: 60px auto;
@@ -58,6 +59,7 @@
     font-weight: 800;
 }
 
+/* 수량/삭제 버튼 */
 .cart-btn,
 .cart-table td a,
 .cart-table td button {
@@ -93,6 +95,7 @@
     min-width: 50px;
 }
 
+/* 합계/주문 영역 */
 .cart-summary {
     margin-top: 24px;
 }
@@ -104,33 +107,47 @@
     font-weight: 800;
 }
 
-.cart-order-btn,
-a.cart-order-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+/* 주문하기 버튼: a/button 둘 다 대응 */
+.cart-page .cart-summary .cart-order-btn,
+.cart-page .cart-summary a.cart-order-btn,
+.cart-page .cart-summary button.cart-order-btn,
+.cart-page .cart-summary .jparts-order-btn,
+.cart-page .cart-summary a.jparts-order-btn,
+.cart-page .cart-summary button.jparts-order-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
-    min-width: 180px;
-    height: 52px;
-    padding: 0 28px;
+    min-width: 180px !important;
+    height: 52px !important;
+    padding: 0 28px !important;
 
-    border: none;
-    border-radius: 8px;
-    background: #2e627a;
+    border: none !important;
+    border-radius: 8px !important;
+    outline: none !important;
+
+    background: #2e627a !important;
+    background-color: #2e627a !important;
     color: #ffffff !important;
 
-    font-size: 18px;
-    font-weight: 800;
-    line-height: 1;
-    text-decoration: none !important;
-    cursor: pointer;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
 
-    transition: background 0.2s ease;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
 }
 
-.cart-order-btn:hover,
-a.cart-order-btn:hover {
-    background: #244f63;
+.cart-page .cart-summary .cart-order-btn:hover,
+.cart-page .cart-summary a.cart-order-btn:hover,
+.cart-page .cart-summary button.cart-order-btn:hover,
+.cart-page .cart-summary .jparts-order-btn:hover,
+.cart-page .cart-summary a.jparts-order-btn:hover,
+.cart-page .cart-summary button.jparts-order-btn:hover {
+    background: #244f63 !important;
+    background-color: #244f63 !important;
     color: #ffffff !important;
 }
 
@@ -197,32 +214,4 @@ a.cart-order-btn:hover {
 
 .product-detail-page .product-actions .btn-primary:hover {
     background: #244f63;
-}
-
-.cart-page .cart-summary a.jparts-order-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    min-width: 180px !important;
-    height: 52px !important;
-    padding: 0 28px !important;
-
-    border: none !important;
-    border-radius: 8px !important;
-
-    background-color: #2e627a !important;
-    color: #ffffff !important;
-
-    font-size: 18px !important;
-    font-weight: 800 !important;
-    line-height: 1 !important;
-
-    text-decoration: none !important;
-    cursor: pointer !important;
-}
-
-.cart-page .cart-summary a.jparts-order-btn:hover {
-    background-color: #244f63 !important;
-    color: #ffffff !important;
 }
