@@ -16,7 +16,6 @@
 
         <section class="product-detail-layout">
 
-            <!-- LEFT: IMAGE -->
             <div class="product-image-area">
                 <div class="product-main-image">
                     {% if product.image_url %}
@@ -32,20 +31,17 @@
                 </div>
             </div>
 
-            <!-- RIGHT: INFO -->
             <div class="product-info-area">
 
                 <div class="product-category-name">
-                    {% if product.category %}
-                        {{ product.category.name }}
-                    {% endif %}
+                    {{ product.category.name|default:"전자부품" }}
                 </div>
 
                 <h1 class="product-title">{{ product.name }}</h1>
 
                 <p class="product-desc">
-                    {% if product.short_description %}
-                        {{ product.short_description }}
+                    {% if product.description %}
+                        {{ product.description }}
                     {% else %}
                         No description available.
                     {% endif %}
@@ -54,12 +50,12 @@
                 <div class="product-meta-table">
                     <div class="meta-row">
                         <div class="meta-label">상품번호</div>
-                        <div class="meta-value">{{ product.serial_number }}</div>
+                        <div class="meta-value">{{ product.serial_number|default:product.id }}</div>
                     </div>
 
                     <div class="meta-row">
                         <div class="meta-label">제조사</div>
-                        <div class="meta-value">{{ product.manufacturer|default:"-" }}</div>
+                        <div class="meta-value">{{ product.manufacturer|default:product.brand|default:"-" }}</div>
                     </div>
 
                     <div class="meta-row">
@@ -69,17 +65,13 @@
 
                     <div class="meta-row">
                         <div class="meta-label">판매가</div>
-                        <div class="meta-value product-price">{{ product.price }} KRW</div>
+                        <div class="meta-value product-price">{{ product.price|default:0 }} KRW</div>
                     </div>
                 </div>
 
                 <div class="product-actions">
-                    <a href="{% url 'cart:add_to_cart' product.id %}" class="btn-outline">
-                        장바구니
-                    </a>
-                    <a href="#" class="btn-primary">
-                        바로구매
-                    </a>
+                    <a href="#" class="btn-outline">장바구니</a>
+                    <a href="#" class="btn-primary">바로구매</a>
                 </div>
 
                 <div class="supplier-section">
