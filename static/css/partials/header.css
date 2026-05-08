@@ -33,7 +33,9 @@
     flex: 0 0 auto;
 }
 
-.category-bar .menu-item > a {
+.category-bar .menu-item > a,
+.category-bar .level2,
+.category-bar .level3-group a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,21 +47,23 @@
     color: #ffffff;
     background: transparent;
 
-    font-weight: 700;
     font-size: 14px;
+    font-weight: 700;
     line-height: 1.2;
     text-align: center;
     text-decoration: none;
 
-    white-space: nowrap;
     border-radius: 8px;
+    white-space: nowrap;
 
     transition: background 0.18s ease;
 }
 
 .category-bar .menu-item > a:hover,
 .category-bar .menu-item > a.active,
-.category-bar .menu-item:hover > a {
+.category-bar .menu-item:hover > a,
+.category-bar .level2:hover,
+.category-bar .level3-group a:hover {
     background: rgba(255, 255, 255, 0.12);
     color: #ffffff;
 }
@@ -75,10 +79,10 @@
     top: 100%;
     left: 0;
 
-    min-width: 420px;
+    min-width: max-content;
     max-width: calc(100vw - 40px);
 
-    padding: 10px;
+    padding: 8px;
     background: #2e627a;
 
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -88,17 +92,16 @@
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
 
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px;
 
     z-index: 9999;
 }
 
-/* 핵심: 이게 빠지면 2차 카테고리 안 보임 */
 .category-bar .menu-item:hover > .top-dropdown {
     display: flex;
 }
 
-/* hover 끊김 방지용 투명 연결 영역 */
+/* hover 끊김 방지 */
 .category-bar .top-dropdown::before {
     content: "";
     position: absolute;
@@ -115,40 +118,12 @@
 .category-bar .mega-column {
     display: flex;
     flex-direction: column;
-    min-width: 160px;
-}
-
-.category-bar .level2,
-.category-bar .level3-group a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 40px;
-    padding: 0 16px;
-
-    color: #ffffff;
-    background: transparent;
-
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-
-    border-radius: 8px;
-    white-space: nowrap;
-
-    transition: background 0.18s ease;
-}
-
-.category-bar .level2:hover,
-.category-bar .level3-group a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    min-width: auto;
 }
 
 .category-bar .level3-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-top: 6px;
+    gap: 4px;
+    margin-top: 4px;
 }
