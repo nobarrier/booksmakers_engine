@@ -1,17 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}{{ product.name }}{% endblock %}
+
 {% block content %}
     <div class="product-detail-page">
 
         <div class="product-breadcrumb">
-            <a href="{% url 'catalog:home' %}">홈</a>
-            <span>›</span>
+            <a href="{% url 'catalog:home' %}">HOME</a>
+            <span>/</span>
+
             {% if product.category %}
                 <a href="{% url 'catalog:category' product.category.slug %}">
                     {{ product.category.name }}
                 </a>
+                <span>/</span>
             {% endif %}
+
+            <span>{{ product.name }}</span>
         </div>
 
         <section class="product-detail-layout">
@@ -26,47 +32,79 @@
                 </div>
 
                 <div class="image-notice">
-                    위 상품 이미지는 참고용 대표 이미지이며,<br>
-                    정확한 사양은 데이터시트에서 확인하세요.
+                    상품 이미지는 참고용 이미지입니다.<br>
+                    정확한 사양은 데이터시트 또는 제조사 정보를 확인해 주세요.
                 </div>
             </div>
 
             <div class="product-info-area">
 
                 <div class="product-category-name">
-                    {{ product.category.name|default:"전자부품" }}
+                    {% if product.category %}
+                        {{ product.category.name }}
+                    {% else %}
+                        미분류
+                    {% endif %}
                 </div>
 
                 <h1 class="product-title">{{ product.name }}</h1>
 
                 <p class="product-desc">
-                    {% if product.description %}
-                        {{ product.description }}
+                    {% if product.short_description %}
+                        {{ product.short_description }}
                     {% else %}
                         No description available.
                     {% endif %}
                 </p>
 
                 <div class="product-meta-table">
+
                     <div class="meta-row">
                         <div class="meta-label">상품번호</div>
-                        <div class="meta-value">{{ product.serial_number|default:product.id }}</div>
+                        <div class="meta-value">
+                            {% if product.serial_number %}
+                                {{ product.serial_number }}
+                            {% else %}
+                                {{ product.id }}
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="meta-row">
                         <div class="meta-label">제조사</div>
-                        <div class="meta-value">{{ product.manufacturer|default:product.brand|default:"-" }}</div>
+                        <div class="meta-value">
+                            {% if product.manufacturer %}
+                                {{ product.manufacturer }}
+                            {% elif product.brand %}
+                                {{ product.brand }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="meta-row">
                         <div class="meta-label">MPN</div>
-                        <div class="meta-value">{{ product.mpn|default:"-" }}</div>
+                        <div class="meta-value">
+                            {% if product.mpn %}
+                                {{ product.mpn }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="meta-row">
                         <div class="meta-label">판매가</div>
-                        <div class="meta-value product-price">{{ product.price|default:0 }} KRW</div>
+                        <div class="meta-value product-price">
+                            {% if product.price %}
+                                {{ product.price }} KRW
+                            {% else %}
+                                0 KRW
+                            {% endif %}
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="product-actions">
@@ -78,6 +116,12 @@
                         바로구매
                     </a>
                 </div>
+
+                {% if product.detail_html %}
+                    <div class="product-detail-description">
+                        {{ product.detail_html|safe }}
+                    </div>
+                {% endif %}
 
                 <div class="supplier-section">
                     <h2>공급 정보</h2>
@@ -91,15 +135,37 @@
                             <th>구매</th>
                         </tr>
                         </thead>
+
                         <tbody>
                         {% for sp in prices %}
                             <tr>
-                                <td>{{ sp.supplier.name }}</td>
-                                <td class="supplier-price">{{ sp.price }} KRW</td>
-                                <td>{{ sp.stock }}</td>
+                                <td>
+                                    {% if sp.supplier %}
+                                        {{ sp.supplier.name }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+
+                                <td class="supplier-price">
+                                    {% if sp.price %}
+                                        {{ sp.price }} KRW
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if sp.stock %}
+                                        {{ sp.stock }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+
                                 <td>
                                     {% if sp.url %}
-                                        <a href="{{ sp.url }}" target="_blank" class="supplier-buy-btn">
+                                        <a href="{{ sp.url }}" target="_blank" rel="noopener" class="supplier-buy-btn">
                                             구매
                                         </a>
                                     {% else %}
